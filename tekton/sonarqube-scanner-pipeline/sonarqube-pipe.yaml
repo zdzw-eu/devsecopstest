@@ -1,0 +1,58 @@
+# 1. git clone (git-clone)
+# 2. unit test goapp (golang-test)
+# 3. code analysis - (sonarqube-scanner)
+
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: complete-app-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+    - name: sonar-settings
+  tasks:
+    - name: fetch-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: 
+        - name: subdirectory
+          value: ""
+
+    - name: unit-test-goapp
+      taskRef:
+        name: golang-test
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      runAfter:
+        - fetch-repository
+      params:
+        - name: package
+          value: github.com/tektoncd/pipeline
+        - name: version
+          value: "1.21.1"    
+
+    - name: code-analysis
+      taskRef:
+        name: sonarqube-scanner
+      runAfter:
+        - unit-test-goapp
+      params:
+        - name: SONAR_HOST_URL
+          value: http://192.168.8.200:9000
+        - name: SONAR_PROJECT_KEY
+          value: 11-12-go-test-app
+        - name: SONAR_ORGANIZATION
+          value: ice
+        - name: SONAR_PROJECT_TOKEN
+          value: 
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+        - name: sonar-settings
+          workspace: sonar-settings    

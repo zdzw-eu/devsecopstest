@@ -1,0 +1,54 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: git-mvn-app-clone
+spec:
+  params:
+    - name: private-github-repo-url
+      description: The private GitHub Repo
+    - name: image-reference
+      type: string
+  workspaces:
+    - name: shared-data
+    - name: docker-credentials
+  tasks:
+    - name: clone-sources
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.private-github-repo-url)
+      workspaces:
+        - name: output
+          workspace: shared-data
+    - name: list-dir
+      taskSpec:
+        steps:
+          - name: dump-directory
+            image: alpine
+            command:
+              - /bin/sh
+            args:
+              - '-c'
+              - |
+                cd workspace; ls; cd output; ls; pwd;
+      runAfter:
+        - build-image-kaniko
+      workspaces:
+        - name: output
+          workspace: shared-data
+    - name: build-image-kaniko
+      taskRef:
+        name: kaniko
+      runAfter:
+        - clone-sources
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: dockerconfig
+          workspace: docker-credentials
+      params:
+      - name: IMAGE
+        value: $(params.image-reference)
+
+

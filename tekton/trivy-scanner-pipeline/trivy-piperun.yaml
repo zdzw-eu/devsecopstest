@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: complete-app-cicd-
+  labels:
+    tekton.dev/pipeline: complete-go-app-cicd
+spec:
+  serviceAccountName: gitlab-bot
+  pipelineRef:
+    name: complete-app-pipeline
+  workspaces:
+    - name: shared-workspace
+      persistentvolumeclaim:
+        claimName: go-app-pvc
+        
+    - name: sonar-settings
+      persistentvolumeclaim:
+        claimName: sonar-config-pvc
+
+    - name: registry-secret
+      secret:
+        secretName: test-gitlab-secret
+

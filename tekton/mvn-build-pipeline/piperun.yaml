@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: mvn-app-clone-
+  labels:
+    tekton.dev/pipeline: mvn-app-clone
+spec:
+  serviceAccountName: github-bot 
+  pipelineRef:
+    name: git-mvn-app-clone
+  params:
+    - name: private-github-repo-url
+      value: 
+    - name: image-reference
+      value: registry.gitlab.com/sameeradamith/getting-started-app
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: docker-credentials
+      secret:
+        secretName: docker-gitlab-secret
+
