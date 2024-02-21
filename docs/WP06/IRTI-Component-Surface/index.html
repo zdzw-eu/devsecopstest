@@ -16,15 +16,15 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
     
     
       
-        <title>App Name - Documentation ZDZW</title>
+        <title>IR Thermal Imaging Inspector - Documentation ZDZW</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#app-name" class="md-skip">
+        <a href="#ir-thermal-imaging-inspector" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              App Name
+              IR Thermal Imaging Inspector
             
           </span>
         </div>
@@ -1030,7 +1030,7 @@
           
   
   <span class="md-ellipsis">
-    App Name
+    IR Thermal Imaging Inspector
   </span>
   
 
@@ -1041,7 +1041,7 @@
         
   
   <span class="md-ellipsis">
-    App Name
+    IR Thermal Imaging Inspector
   </span>
   
 
@@ -1971,123 +1971,100 @@
                   
 
 
-<h1 id="app-name">App Name</h1>
+<h1 id="ir-thermal-imaging-inspector">IR Thermal Imaging Inspector</h1>
 <h2 id="general-description">General Description</h2>
-<p>This app is based on IR Thermal inspection. The app will allow end-users to monitor a material or a component condition. This monitoring is based on the following: </p>
-<ol>
-<li>Surface visualization </li>
-<li>Automatic defect detection based on AI. </li>
-</ol>
+<p>IR Thermal Imaging Inspector (IRTII) is an application from which it is possible to visualize and analyze 2D thermal images obtained during industrial processes. For this purpose, both qualitative and quantitative inspection of the acquired images is offered as a web-based service (SaaS).</p>
+<p>Regarding qualitative inspection, a viewer is proposed that allows loading multiple images, modifying brightness and contrast and applying a noise reduction median filter.</p>
+<p>Regarding the quantitative analysis, it is proposed to embed a neural network capable of detecting and classifying different types of defects, if any, in the thermal images. It should be noted that the embedded deep learning based model can be retrained to be used in particular processes by means of few-shot learning or supervised learning methodologies depending on the size of the dataset and the number and type of annotations.</p>
 <h2 id="top-ten-functionalities">Top Ten Functionalities</h2>
 <ol>
-<li>Surface quality inspection from Thermal images </li>
-<li>AV_F_01.4 AV User Interface</li>
-<li>IR_F_01 IR Capture</li>
-<li>R_F_01.1 Infrared Images Scale</li>
-<li>Preprocess acquired Thermal images for noise reduction </li>
-<li>SAD_F_01.4 SAD Noise Reduction</li>
-<li>R_F_01.1 Infrared Images Scale</li>
-<li>Model training with general Thermal images databases </li>
-<li>SAD_F_02 SAD Segmentation</li>
-<li>SAD_F_03.2 SAD Object Classification</li>
-<li>SAD_F_05.7 SAD Defect Detection and classification</li>
-<li>AV_F_04.3 AI model deployment</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>Use the trained model to infer from images acquired on production line </li>
-<li>SAD_F_02 SAD Segmentation</li>
-<li>SAD_F_03.2 SAD Object Classification</li>
-<li>SAD_F_05.7 SAD Defect Detection and classification</li>
-<li>AV_F_04.4 Edge processing unit based on GPUs</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>Provide high-speed and low latency quality feedback </li>
-<li>AV_F_04.4 Edge processing unit based on GPUs</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>Generate output data for anomaly detection purposes (classification, localization) </li>
-<li>SAD_F_02 SAD Segmentation</li>
-<li>SAD_F_03.2 SAD Object Classification</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>2D visualization of Thermal images defects </li>
-<li>SAD_F_05.7 SAD Defect Detection and classification</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>Obtain metrics to evaluate the inference accuracy of the model </li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>IR_F_05.4 IR Defect Estimation</li>
-<li>Reconsider if the model must be retrained to fine-tune </li>
-<li>SAD_F_03.5 SAD AI model training</li>
-<li>AV_F_04.3 AI model deployment</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
-<li>IR_F_05.4 IR Defect Estimation</li>
-<li>Optimise the process for on-edge retraining </li>
-<li>AV_F_04.4 Edge processing unit based on GPUs</li>
-<li>IR_F_05.1 IR Defect Detection Control</li>
-<li>IR_F_05.2 IR Defect Location</li>
+<li>
+<p><strong>Loading, viewing and inspection of thermal images</strong> 
+  Multiple acquired thermal images can be uploaded for visualization and preliminary evaluation by means of a qualitative inspection of the industrial process to be evaluated.</p>
+</li>
+<li>
+<p><strong>Brightness and contrast modification for qualitative inspection of thermal images</strong> 
+  Possibility to modify the brightness and contrast of each image using a scroller with different values. This will help for a more specific qualitative evaluation, where certain areas of the thermal images can be analyzed in more depth.</p>
+</li>
+<li>
+<p><strong>Thermal image preprocessing using noise reduction filters</strong> 
+  Possibility to reduce image noise by means of different filters. Allows the user to select the most convenient filter to perform the qualitative analysis of the thermal images.</p>
+</li>
+<li>
+<p><strong>Detection of defects in thermal images</strong> 
+  Training of neural networks with thermal images with identified defects. Inference process on new images for automatic defect detection in thermal images of industrial processes.</p>
+</li>
+<li>
+<p><strong>Classification of defects in thermal imaging</strong> 
+  Training artificial intelligence models based on deep learning using images annotated to a given class. Possibility to perform inference on new images to classify them according to the types of defects on which they have been trained. </p>
+</li>
+<li>
+<p><strong>Provide high-speed and low latency quality feedback</strong> 
+  Improvement and optimization of embedded neural networks for performing inference on new thermal imaging samples. Possibility to obtain inference results in a more efficient and faster way.</p>
+</li>
+<li>
+<p><strong>Analysis of the areas of interest for classification and screening</strong> 
+  Visualization of the heat maps obtained in the inference models on the new samples. Possibility of qualitatively analyzing the areas of interest of the image for the neural network, being able to identify biases or features that help in the detection and classification of defects.</p>
+</li>
+<li>
+<p><strong>Obtain metrics to evaluate the inference performance of the model</strong> 
+  In the case of performing a neural network inference evaluation, visualization of different figures of merit at the global level and by image on the performance of the inference process.</p>
+</li>
+<li>
+<p><strong>Reconsider if the model must be retrained to fine-tune</strong> 
+  In case the inference evaluation process does not meet expectations, the model can be retrained and fine-tuned for a specific application based on the images provided.</p>
+</li>
+<li>
+<p><strong>Optimise the process for on-edge retraining</strong> 
+  Optimization of the retraining process by means of few-shot learning techniques that allow to quickly modify the neural network predictions in order to perform an adequate inference from few labeled data and short training time.</p>
+</li>
 </ol>
 <h2 id="architecture-diagram">Architecture Diagram</h2>
-<p>The solution includes the following components: 
-- IR Thermal Inspector. This element is the core of the app. It receives the stream of the camera, the AI-model and their configurations to perform the inference to automatically detect the surface defects. It communicates with GUI (Display) through OPC-UA and with the camera using the GeniCam standard. 
-- GUI (Display): with the real-time image. 
-- Cameras. They will acquire the images and send them to the Inspector. It communicates with the former element using GeniCam standard. 
-- Storage. It will store the information of the defects detected. 
-- AI Training Module. It represents the place in which the models are developed and the sent to the Inspector. </p>
+<p>The high-level diagram of the IR Thermal Imaging Inspector architecture is depicted below.</p>
 <p><br> <!-- Dejar un espacio --></p>
 <div align="center">
   <img src="images/architecture_diagram.png" alt="Figure 1. Architecure Diagram" width="800"/>
 </div>
 <p><br> <!-- Dejar un espacio --></p>
+<p>The solution consists of the following components:</p>
+<ul>
+<li>
+<p><strong>GUI:</strong> Graphical user interface where the thermal images are loaded and the defect inspector is called from which it is possible to carry out the functionalities of the application.</p>
+</li>
+<li>
+<p><strong>IR Thermal Inspector:</strong> This element is the core of the app. It receives the data loaded through the GUI and is in charge of managing the user's requests in order to display the different possible outputs. </p>
+</li>
+<li>
+<p><strong>Preprocessing:</strong> Module where brightness and contrast modification is applied and noise filters are applied when requested by the user. </p>
+</li>
+<li>
+<p><strong>AI module:</strong> Application of the inference process by artificial intelligence models based on deep learning to thermal imaging. Depending on the requested task and the type of data, detection of defects in the images or classification of such images will be returned.</p>
+</li>
+<li>
+<p><strong>Storage:</strong> Storage of the outputs obtained by the artificial intelligence models on the loaded images. Possibility of visualization of metrics to evaluate the possibility of retraining from the inferred values.</p>
+</li>
+</ul>
 <h2 id="image-overview">Image Overview</h2>
-<p>The App comprises a graphical user interface (GUI) composed of five windows or panels that allow interaction with the files and functionalities of the application. These windows can be selected in the left banner marked in the following figure and are divided into ‘Menu’, ‘IR Thermal Inspector’, ‘Analysis’, ‘New User’ and ‘Settings’. The ‘Menu’ window, allows the user to select the different sections in the app. </p>
 <p><br> <!-- Dejar un espacio --></p>
 <div align="center">
-  <img src="images/mockup-menu.png" alt="Figure 2. ‘Menu’ window of App Global GUI." width="800"/>
+  <img src="images/ZDZW_WP6_IRTII_GIF.gif" alt="Figure 2. Image overview" width="800"/>
 </div>
 <p><br> <!-- Dejar un espacio --></p>
-<p>The application interface comprises a comprehensive control center, enabling the management of the automatic inspection system. Users can access an offline view of the IR cameras on “IR Thermal Inspector”, as well as the most recent image that has undergone inference processing. Additionally, the interface features convenient buttons to perform the main tasks. </p>
-<p>There are displayed the principal tools to visualize images, download, zoom. It is possible to reduce noise with the preprocessing button. It allows to infer with a tiny or large model, and launch the thermal inspector to infer on new images. It could be interesting to display the type of defects by class. </p>
-<p><br> <!-- Dejar un espacio --></p>
-<div align="center">
-  <img src="images/mockup-visualization.png" alt="Figure 3. 'Pre-processing and visualisation' window." width="800"/>
-</div>
-<p><br> <!-- Dejar un espacio --></p>
-<p>In the figure bellow, a separated window is displayed to show the analysis screens i.e. their location in 2D images or graph of the history of the last 10 images analyzed. The main idea in this screen will be to know the correlations between the sensor data and the defects in the images. An image of the torch position will be provided, in overall percentage may be an option. It will also be possible to download a report with the exported results. </p>
-<p><br> <!-- Dejar un espacio --></p>
-<div align="center">
-  <img src="images/mockup-analysis.png" alt="Figure 4. 'Analysis' window." width="800"/>
-</div>
-<p><br> <!-- Dejar un espacio --></p>
-<p>Finally, the ‘New User’ window allows adding new users to manage the application. The ‘Settings’ page includes the main configuration features to work with the software, such as security, privacy and display settings and preferences. </p>
-<p><br> <!-- Dejar un espacio --></p>
-<div align="center">
-  <img src="images/mockup-new_user.png" alt="Figure 5. 'New user' window." width="800"/>
-</div>
-<p><br> <!-- Dejar un espacio --></p>
+<p>The typical workflow is shown in the image sequence of the image overview. First the thermal images are loaded. Then one can see how several images can be loaded at the same time and how each image can be displayed. In the following sequences, you the qualitative analysis that can be performed by varying the slider values is shown. In this way, brightness, contrast and noise reduction help to sharpen the preliminary analysis. The functionalities referred to the application of embedded artificial intelligence models to obtain results and analyze the inference made will be developed during the next months.</p>
 <h2 id="hardware-components">Hardware Components</h2>
 <p>Edge processing unit based on GPUs: AI inference optimized on available GPU hardware with 100% high-rate inspection. </p>
 <h2 id="computation-requirements">Computation Requirements</h2>
 <ul>
 <li>Classification of images to detect defects can rely on cloud services</li>
 <li>Possibility to store acquired data locally or in shared/cloud space</li>
+<li>Having in mind the computational needs of the trainig and inference phase of the AI services we recommended GPU with RAM 24 GB</li>
 </ul>
 <h2 id="installation-procedure">Installation Procedure</h2>
-<p>Step by step on how to install the application:
-* Standalone
-* In the Kubernetes platformm using helm charts: description of the different options</p>
+<p>The instructions for installing the app will be defined once the application has been completed.</p>
 <h2 id="how-to-use">How To Use</h2>
-<p>The instructions to follow for the use of the app will be defined once the application has been developed. The following can be established as a provisional guideline:
-1. Installation of the app (to be developed).
-2. Select the 'New user' section in the 'Menu' window of the app and register.
-3. Select the 'preprocessing and visualization' section in the 'Menu' window of the app.
-4. Push the 'Load image' button to select the image to be analyzed.
-5. In the 'preprocessing and visualization' window, scroll through the slices and edit the settings (birghtness, contrast, transparency, speckle reduction) of the image.
-6. Use the 'Anaylsis' window to assess the defect detection and classification of the IR Thermal image. Optionally, export the results of the analysys via the button 'Export results'.</p>
+<p>The instructions for using the app will be defined once the application has been completed.</p>
 <h2 id="additional-learning-materials">Additional Learning Materials</h2>
-<p>Links to other learning materials like youtube tutorials or work from WP10</p>
+<p>Links to other learning materials like youtube tutorials will be added once the application has been completed.</p>
 
 
 

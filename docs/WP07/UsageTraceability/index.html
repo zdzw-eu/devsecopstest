@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -1017,7 +1017,7 @@
         
   
   <span class="md-ellipsis">
-    App Name
+    IR Thermal Imaging Inspector
   </span>
   
 
@@ -2345,7 +2345,7 @@
 <p>Go–1.14.x</p>
 </li>
 </ul>
-<p><em>Note:</em> More information and details about the requirements are provided in the <a href="https://github.com/zdzw-eu/UsageTraceability/blob/main/docs/annex/ZDZW_AmazonManagedBlockhainDeployment_ANNEX.pdf">Deployment Annex</a></p>
+<p><em>Note:</em> More information and details about the requirements are provided in the <a href="./annex/ZDZW_AmazonManagedBlockhainDeployment_ANNEX.pdf">Deployment Annex</a></p>
 <h3 id="62-traceability-gateway">6.2. Traceability Gateway</h3>
 <p>The deployment of the Traceability Gateway is containerized using Docker, providing a convenient and isolated environment for efficient execution. Below are the specific computation requirements for the Traceability Gateway within a Dockerized deployment:</p>
 <ul>
@@ -2442,6 +2442,7 @@
 <h3 id="81-blockchain-platform">8.1. Blockchain Platform</h3>
 <p>The Blockchain's data storage and retrieval services are provided by a Blockchain API, as shown in Figure 1. This API exposes the Blockchain services to the Traceability Gateway and the zApp usage tracking to facilitate the integration of all the modules that make up T7.4.</p>
 <p>This API is deployed on the AWS instance, as the Computation Requirements section explains. The connection to this API is made via a public IP of the instance through port 8080. Access privileges have been given to the Traceability Gateway and the zApp usage tracking to allow access. This ensures privacy and access control to the security groups interacting with the Blockchain platform, which, in turn, enhances the privacy of the solution.</p>
+<p>Depending on the business model of each Zapp, the smart contract will be different. Four smart contract models have been defined. Currently the "Pay per Volume" model has been implemented, so the examples below refer to this type of contract.</p>
 <p>The data offered is in JSON format, which corresponds to the following schema:</p>
 <pre><code class="language-bash">{
  &quot;ZAppId&quot;:&quot;ZApp1&quot;,
@@ -2454,20 +2455,26 @@
   ]
 }
 </code></pre>
-<p>By exploiting this data format, T7.4 modules can invoke smart contracts, and use them to obtain and store information. For this purpose, the API offers three calls, which are as follows:</p>
-<p><strong>Initializating the data:</strong></p>
-<pre><code class="language-bash">curl http://3.248.77.23:8080/invokeInit --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;:&quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;:&quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;, &quot;MaxUses&quot;:&quot;100&quot;,&quot;InitTime&quot;:&quot;2024-01-01 01:01:01&quot;}'
+<p>By exploiting this data format, T7.4 modules can invoke smart contracts, and use them to obtain and store information. For this purpose, the API offers five calls, which are as follows:</p>
+<p><strong>Create a SmartContract for a Zapp:</strong></p>
+<p>When a company buys a Zapp using the marketplace the sentences that the MarketPlace will invoke is this one:</p>
+<pre><code class="language-bash">curl http://3.248.77.23:8080/createSmartContractZapp --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;: &quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;PayType&quot;:&quot;A&quot;, &quot;MaxUses&quot;:&quot;500&quot;,&quot;InitTime&quot;:&quot;2024-01-01 01:01:01&quot;}'
 
 </code></pre>
 <p>Whose response, if correct is "initTrue"</p>
-<p><strong>Store data in the Blockchain:</strong></p>
+<p><strong>Initializating the MaxUses of a Zapp in a Machine:</strong></p>
+<pre><code class="language-bash">curl http://3.248.77.23:8080/invokeInit --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;: &quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;:&quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;, &quot;MaxUses&quot;:&quot;500&quot;,&quot;InitTime&quot;:&quot;2024-01-01 01:01:01&quot;}'
+
+</code></pre>
+<p>Whose response, if correct is "initTrue"</p>
+<p><strong>Store Use data in the Blockchain:</strong></p>
 <pre><code class="language-bash">curl http://3.248.77.23:8080/invokeInfo --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;:&quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;:&quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;, &quot;UsesCount&quot;:&quot;10&quot;, &quot;InitTime&quot;:&quot;2024-01-01 01:01:01&quot;, &quot;EndTime&quot;:&quot;2024-01-28 01:01:01&quot;}' 
 </code></pre>
 <p>Whose response, if correct is "true"</p>
-<p><strong>Get Initial Data</strong></p>
-<pre><code class="language-bash">curl http://3.248.77.23:8080/getInitInfo/ --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;:&quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;:&quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;}' 
+<p><strong>Get Max Uses Initialization Data</strong></p>
+<pre><code class="language-bash">curl http://3.248.77.23:8080/getInitInfo/ --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;: &quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;: &quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;}' 
 </code></pre>
-<p><strong>Get all the historical data</strong></p>
+<p><strong>Get all the historical data of the use of a Zapp</strong></p>
 <pre><code class="language-bash">curl http://3.248.77.23:8080/getAllInfo --include --header &quot;Content-Type: application/json&quot; --request &quot;POST&quot; --data '{&quot;ZAppId&quot;:&quot;ZApp1&quot;, &quot;UserId&quot;:&quot;User1&quot;, &quot;MachineId&quot;:&quot;Machine1&quot;, &quot;PayType&quot;:&quot;A&quot;, &quot;InitTime&quot;:&quot;2016-01-01 01:01:01&quot;, &quot;EndTime&quot;:&quot;2025-01-01 01:01:01&quot;}' 
 </code></pre>
 <h3 id="82-traceability-gateway">8.2. Traceability Gateway</h3>
@@ -2523,6 +2530,7 @@
 <h2 id="9-additional-learning-materials">9. Additional Learning Materials</h2>
 <p>HiperLedged Fabric <a href="https://www.hyperledger.org/projects/fabric">https://www.hyperledger.org/projects/fabric</a></p>
 <p>Amazon Managed Blockchain <a href="https://aws.amazon.com/es/managed-blockchain/">https://aws.amazon.com/es/managed-blockchain/</a> </p>
+<p>Amazon Managed Blockchain Deployment <a href="https://github.com/zdzw-eu/UsageTraceability/blob/main/docs/annex/ZDZW_AmazonManagedBlockhainDeployment_ANNEX.pdf">https://github.com/zdzw-eu/UsageTraceability/blob/main/docs/annex/ZDZW_AmazonManagedBlockhainDeployment_ANNEX.pdf</a></p>
 
 
 
